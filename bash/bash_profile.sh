@@ -27,7 +27,6 @@ alias cp="cp -v"
 
 alias mkdir="mkdir -pv"
 alias cdev='cd ~/code'
-alias street='cd ~/code/street'
 alias home='cd ~'
 alias ~='cd ~'
 alias cdo='cd && open .'
