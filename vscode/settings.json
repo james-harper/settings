@@ -1,0 +1,49 @@
+{
+  "workbench.colorTheme": "Material Theme",
+  "workbench.iconTheme": "eq-material-theme-icons",
+  "editor.fontFamily": "'Fira Code Light',Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 16,
+  "editor.insertSpaces": true,
+  "editor.minimap.enabled": false,
+  "files.eol": "\n",
+  "javascript.format.enable": true,
+  "files.trimTrailingWhitespace": true,
+  "editor.rulers": [
+      80,
+      120
+  ],
+  "editor.renderWhitespace": "boundary",
+  "editor.renderLineHighlight": "all",
+  "editor.renderIndentGuides": true,
+  "editor.selectionHighlight": true,
+  "editor.detectIndentation": true,
+  "telemetry.enableTelemetry": false,
+  "editor.mouseWheelZoom": false,
+  "workbench.editor.enablePreview": false,
+  "files.insertFinalNewline": true,
+  "html.format.indentInnerHtml": true,
+  "html.format.maxPreserveNewLines": 1,
+  "html.format.indentHandlebars": true,
+  "html.format.extraLiners": "",
+  "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/node_modules": true,
+      "**/vendor": true
+  },
+  "search.exclude": {
+      "**/node_modules": true,
+      "**/vendor": true
+  },
+  "files.watcherExclude": {
+      "/node_modules/": true,
+      "/vendor/": true
+  },
+  "window.zoomLevel": 0,
+  "editor.tabSize": 2,
+  "eslint.autoFixOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "editor.tabCompletion": "on",
+  "editor.suggest.localityBonus": true,
+  "workbench.tree.horizontalScrolling": true
+}
