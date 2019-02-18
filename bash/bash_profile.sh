@@ -70,6 +70,14 @@ parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
+# open pr page on github for current branch
+pr () {
+  local repo=`git remote -v | grep -m 1 "(push)" | sed -e "s/.*github.com[:/]\(.*\)\.git.*/\1/"`
+  local branch=`git name-rev --name-only HEAD`
+  echo "... creating pull request for branch \"$branch\" in \"$repo\""
+  open "https://github.com/$repo/pull/new/$branch?expand=1"
+}
+
 alias h='history'
 alias histgrep='history | grep'
 alias hs='history | grep -i $1'
