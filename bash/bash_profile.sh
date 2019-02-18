@@ -61,6 +61,7 @@ alias gnew='git checkout -b'
 alias res='git reset --hard'
 alias gdev='git checkout develop && git pull origin'
 alias gitdiff='git difftool -y -x "colordiff -y -W $COLUMNS" | less -R'
+alias merge='git merge'
 
 git_branch_dates() {
   git for-each-ref --sort=authordate --format '%(authordate:iso) %(align:left,25)%(refname:short)%(end) %(subject)' refs/heads
