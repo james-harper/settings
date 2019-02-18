@@ -229,6 +229,9 @@ port() {
   lsof -i tcp:"$@"
 }
 
+# Get current public ip address
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+
 #   extract:  Extract most know archives with one command
 #   ---------------------------------------------------------
 extract () {
