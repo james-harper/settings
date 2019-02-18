@@ -185,9 +185,13 @@ ff () { /usr/bin/find . -name "$@" ; }      # ff:       Find file under the curr
 ffs () { /usr/bin/find . -name "$@"'*' ; }  # ffs:      Find file whose name starts with a given string
 ffe () { /usr/bin/find . -name '*'"$@" ; }  # ffe:      Find file whose name ends with a given string
 
+google() {
+  open "https://google.com/search?q=$1"
+}
+
 #   spotlight: Search for a file using MacOS Spotlight's metadata
 #   -----------------------------------------------------------
-    spotlight () { mdfind "kMDItemDisplayName == '$@'wc"; }
+spotlight () { mdfind "kMDItemDisplayName == '$@'wc"; }
 
 # Goes up a specified number of directories  (i.e. up 4)
 up () {
