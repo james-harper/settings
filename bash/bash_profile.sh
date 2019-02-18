@@ -220,6 +220,11 @@ rmpwd() {
   rm -rf $THIS
 }
 
+# check who uses port
+port() {
+  lsof -i tcp:"$@"
+}
+
 #   extract:  Extract most know archives with one command
 #   ---------------------------------------------------------
 extract () {
