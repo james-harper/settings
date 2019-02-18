@@ -37,16 +37,14 @@ alias finder_h='defaults write com.apple.Finder AppleShowAllFiles FALSE; killAll
 alias here='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
 # open current finder directory in terminal
 cdf () {
-        target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
-        if [ "$target" != "" ]
-        then
-                cd "$target"
-                pwd
-        else
-                echo 'No Finder window found' >&2
-        fi
+  target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
+  if [ "$target" != "" ] then
+    cd "$target"
+    pwd
+  else
+    echo 'No Finder window found' >&2
+  fi
 }
-
 
 alias ga='git add'
 alias ga.='git add .'
@@ -78,8 +76,6 @@ alias hs='history | grep -i $1'
 if [ ! -d ~/.history/$(date -u +%Y/%m/) ]; then
   mkdir -p ~/.history/$(date -u +%Y/%m/)
 fi
-
-#cat .history/2016/09/* |sort -n| uniq
 
 export HISTFILE="${HOME}/.history/$(date -u '+%Y/%m/%d %H.%M.%S')"
 export HISTSIZE=
@@ -121,7 +117,6 @@ function cheat() {
   curl cht.sh/$1
 }
 alias cht='cheat'
-
 alias weather='curl wttr.in/Manchester'
 
 # alias chmod commands
@@ -157,7 +152,6 @@ alias hup='cd ~/Homestead && vagrant up'
 alias hssh='cd ~/Homestead && vagrant ssh'
 source ~/.nvm/nvm.sh
 
-# Useful functions
 function homestead() {
   ( cd ~/Homestead && vagrant $* )
 }
@@ -185,28 +179,26 @@ ffe () { /usr/bin/find . -name '*'"$@" ; }  # ffe:      Find file whose name end
     spotlight () { mdfind "kMDItemDisplayName == '$@'wc"; }
 
 # Goes up a specified number of directories  (i.e. up 4)
-up ()
-{
-	local d=""
-	limit=$1
-	for ((i=1 ; i <= limit ; i++))
-		do
-			d=$d/..
-		done
-	d=$(echo $d | sed 's/^\///')
-	if [ -z "$d" ]; then
-		d=..
-	fi
-	cd $d
+up () {
+  local d=""
+  limit=$1
+  for ((i=1 ; i <= limit ; i++))
+    do
+      d=$d/..
+    done
+  d=$(echo $d | sed 's/^\///')
+  if [ -z "$d" ]; then
+    d=..
+  fi
+  cd $d
 }
 
 # Trim leading and trailing spaces (for scripts)
-trim()
-{
-	local var=$@
-	var="${var#"${var%%[![:space:]]*}"}"  # remove leading whitespace characters
-	var="${var%"${var##*[![:space:]]}"}"  # remove trailing whitespace characters
-	echo -n "$var"
+trim() {
+  local var=$@
+  var="${var#"${var%%[![:space:]]*}"}"  # remove leading whitespace characters
+  var="${var%"${var##*[![:space:]]}"}"  # remove trailing whitespace characters
+  echo -n "$var"
 }
 
 trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
@@ -219,37 +211,37 @@ rmpwd() {
 
 #   extract:  Extract most know archives with one command
 #   ---------------------------------------------------------
-    extract () {
-        if [ -f $1 ] ; then
-          case $1 in
-            *.tar.bz2)   tar xjf $1     ;;
-            *.tar.gz)    tar xzf $1     ;;
-            *.bz2)       bunzip2 $1     ;;
-            *.rar)       unrar e $1     ;;
-            *.gz)        gunzip $1      ;;
-            *.tar)       tar xf $1      ;;
-            *.tbz2)      tar xjf $1     ;;
-            *.tgz)       tar xzf $1     ;;
-            *.zip)       unzip $1       ;;
-            *.Z)         uncompress $1  ;;
-            *.7z)        7z x $1        ;;
-            *)     echo "'$1' cannot be extracted via extract()" ;;
-             esac
-         else
-             echo "'$1' is not a valid file"
-         fi
-    }
+extract () {
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1     ;;
+      *.tar.gz)    tar xzf $1     ;;
+      *.bz2)       bunzip2 $1     ;;
+      *.rar)       unrar e $1     ;;
+      *.gz)        gunzip $1      ;;
+      *.tar)       tar xf $1      ;;
+      *.tbz2)      tar xjf $1     ;;
+      *.tgz)       tar xzf $1     ;;
+      *.zip)       unzip $1       ;;
+      *.Z)         uncompress $1  ;;
+      *.7z)        7z x $1        ;;
+      *)     echo "'$1' cannot be extracted via extract()" ;;
+        esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
 
 #   myps: List processes owned by my user:
 #   ------------------------------------------------------------
-    myps() { ps $@ -u $USER -o pid,%cpu,%mem,start,time,bsdtime,command ; }
+myps() { ps $@ -u $USER -o pid,%cpu,%mem,start,time,bsdtime,command ; }
 
 #   ttop:  Recommended 'top' invocation to minimize resources
 #   ------------------------------------------------------------
 #       Taken from this macosxhints article
 #       http://www.macosxhints.com/article.php?story=20060816123853639
 #   ------------------------------------------------------------
-    alias ttop="top -R -F -s 10 -o rsize"
+alias ttop="top -R -F -s 10 -o rsize"
 
 ## History
 # Larger bash history (default is 500)
@@ -263,9 +255,8 @@ function get_prompt_branch() {
   IS_GIT_DIRECTORY=$(git rev-parse --is-inside-work-tree > /dev/null 2>&1;)
   BASIC_PROMPT="\[\e[33m\]\w \\$\[\e[m\] ";
   if [ IS_GIT_DIRECTORY ]; then
-  # if [ $(pwd) == /Users/jamesharper/code/*]; then
-      BRANCH="\[\e[32m\]$(trim $(parse_git_branch))\[\e[m\]";
-      export PS1="${BRANCH} ${BASIC_PROMPT}";
+    BRANCH="\[\e[32m\]$(trim $(parse_git_branch))\[\e[m\]";
+    export PS1="${BRANCH} ${BASIC_PROMPT}";
   else
     export PS1="${BASIC_PROMPT}";
   fi
