@@ -71,6 +71,12 @@ parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
+# Set upstream and push
+1stpush() {
+  BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  git push --set-upstream origin $BRANCH
+}
+
 # open pr page on github for current branch
 pr () {
   local repo=`git remote -v | grep -m 1 "(push)" | sed -e "s/.*github.com[:/]\(.*\)\.git.*/\1/"`
