@@ -305,3 +305,14 @@ function add_alias {
     echo "Alias added! $1 : $2";
   fi
 }
+
+npmi () {
+  local packagename=$(echo ${@} | sed -E 's/(\-+[a-zA-Z0-9]+| )//g')
+  local opt
+  npm info ${packagename} | less
+  echo "Is it the right package? (y/n)"
+  read opt
+  if [[ "${opt}" == "y" ]]; then
+    npm i ${@}
+  fi
+}
