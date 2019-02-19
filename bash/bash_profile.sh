@@ -295,3 +295,13 @@ function get_prompt_branch() {
 export PROMPT_COMMAND=get_prompt_branch
 export PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND"
 
+# Quickly add a new alias
+function add_alias {
+  if [ $# -ne 2 ]; then
+    echo "Invalid input. 2 arguments required. Alias and command.";
+  else
+    echo "alias $1=\"$2\"" >> ~/.bash_profile;
+    source ~/.bash_profile;
+    echo "Alias added! $1 : $2";
+  fi
+}
