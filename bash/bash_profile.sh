@@ -60,6 +60,7 @@ alias gpl='git pull'
 alias gnew='git checkout -b'
 alias res='git reset --hard'
 alias gdev='git checkout develop && git pull origin'
+alias master='git checkout master'
 alias gitdiff='git difftool -y -x "colordiff -y -W $COLUMNS" | less -R'
 alias merge='git merge'
 
