@@ -93,7 +93,6 @@ if [ ! -d ~/.history/$(date -u +%Y/%m/) ]; then
 fi
 
 export HISTFILE="${HOME}/.history/$(date -u '+%Y/%m/%d %H.%M.%S')"
-export HISTSIZE=
 export HISTCONTROL=ignoreboth
 export HISTCONTROL=erasedups
 export HISTTIMEFORMAT="%d/%m/%Y-%H:%M:%S: "
@@ -275,7 +274,7 @@ alias ttop="top -R -F -s 10 -o rsize"
 
 ## History
 # Larger bash history (default is 500)
-export HISTSIZE=1024
+export HISTSIZE=9001
 export HISTFILESIZE=$HISTSIZE
 # Causes bash to append to history instead of overwriting it so if you start a
 # new terminal, you have old session history
