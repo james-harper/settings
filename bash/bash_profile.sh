@@ -29,6 +29,7 @@ alias mkdir="mkdir -pv"
 alias cdev='cd ~/code'
 alias home='cd ~'
 alias ~='cd ~'
+alias -- -='cd -'
 alias cdo='cd && open .'
 alias o='open'
 alias chrome="open -a google\ chrome"
