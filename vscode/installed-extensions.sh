@@ -31,3 +31,4 @@ code --install-extension whtouche.vscode-js-console-utils
 code --install-extension wix.vscode-import-cost
 code --install-extension wmaurer.change-case
 code --install-extension yatki.vscode-surround
+code --install-extension VisualStudioExptTeam.vscodeintellicode
