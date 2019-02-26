@@ -318,3 +318,5 @@ npmi () {
     npm i ${@}
   fi
 }
+
+alias hnews="open https://news.ycombinator.com/news"
