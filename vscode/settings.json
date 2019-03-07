@@ -46,5 +46,15 @@
   "editor.tabCompletion": "on",
   "editor.suggest.localityBonus": true,
   "workbench.tree.horizontalScrolling": true,
-  "workbench.editor.showTabs": true
+  "workbench.editor.showTabs": true,
+  "multiCommand.commands": [
+    {
+        "command": "multiCommand.semiColonAndNewLine",
+        "sequence": [
+            "cursorLineEnd",
+            {"command": "type", "args": {"text": ";"}},
+            "editor.action.insertLineAfter",
+        ]
+    }
+]
 }
