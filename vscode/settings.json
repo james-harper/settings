@@ -45,5 +45,6 @@
   "eslint.alwaysShowStatus": true,
   "editor.tabCompletion": "on",
   "editor.suggest.localityBonus": true,
-  "workbench.tree.horizontalScrolling": true
+  "workbench.tree.horizontalScrolling": true,
+  "workbench.editor.showTabs": true
 }
