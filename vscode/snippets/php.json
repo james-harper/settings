@@ -1,0 +1,34 @@
+{
+  "Log Facade": {
+    "prefix": "llog",
+    "body": ["use Illuminate\\Support\\Facades\\Log;"],
+    "description": "Include statement for Laravel Log Facade"
+  },
+  "Log::Debug": {
+    "prefix": "ldeb",
+    "body": [
+      "Log::debug($1);"
+    ],
+    "description": "Laravel log debug"
+  },
+  "Public Method": {
+    "prefix": "met",
+    "body": [
+      "public function $1($2)",
+      "{",
+      "    $3",
+      "}"
+    ],
+    "description": "Php public method"
+  },
+  "Private Method": {
+    "prefix": "pmet",
+    "body": [
+      "private function $1($2)",
+      "{",
+      "    $3",
+      "}"
+    ],
+    "description": "Php private method"
+  }
+}
