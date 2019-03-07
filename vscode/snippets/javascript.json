@@ -1,0 +1,9 @@
+{
+  "Print object to console": {
+    "prefix": "con",
+    "body": [
+      "console.log('$1', $1);$2"
+    ],
+    "description": "console.log an object"
+  }
+}

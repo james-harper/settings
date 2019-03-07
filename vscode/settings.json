@@ -55,6 +55,21 @@
             {"command": "type", "args": {"text": ";"}},
             "editor.action.insertLineAfter",
         ]
+    },
+    {
+        "command": "multiCommand.consoleLogCurrentVariable",
+        "sequence": [
+            "cursorWordStartLeft",
+            "cursorWordEndRightSelect",
+            "editor.action.clipboardCopyAction",
+            "cursorLineEnd",
+            "editor.action.insertLineAfter",
+            {"command": "editor.action.insertSnippet", "args": {"name": "Print object to console"}},
+            "editor.action.clipboardPasteAction",
+            "removeSecondaryCursors",
+            "cursorLineEnd",
+            "editor.action.insertLineAfter",
+        ]
     }
 ]
 }
