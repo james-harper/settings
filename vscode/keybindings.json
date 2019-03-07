@@ -80,5 +80,10 @@
     "key": "cmd+enter",
     "command": "multiCommand.semiColonAndNewLine",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+alt+c",
+    "command": "multiCommand.consoleLogCurrentVariable",
+    "when": "editorTextFocus"
   }
 ]
