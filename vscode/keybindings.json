@@ -85,5 +85,9 @@
     "key": "cmd+alt+c",
     "command": "multiCommand.consoleLogCurrentVariable",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "workbench.action.closePanel"
   }
 ]
