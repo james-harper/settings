@@ -4,6 +4,10 @@ alias art='php artisan'
 
 export EDITOR=/usr/bin/nano
 
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+
 ## Tab improvements
 bind 'set completion-ignore-case on'
 bind 'set show-all-if-ambiguous on'
