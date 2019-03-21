@@ -5,5 +5,20 @@
       "console.log('$1', $1);$2"
     ],
     "description": "console.log an object"
+  },
+  "Bind method": {
+    "prefix": "bnd",
+    "body": [
+      "this.$1 = this.$1.bind(this);",
+    ],
+    "description": "React: bind method in constructor"
+  },
+  "Import Prop Types": {
+    "prefix": "propt",
+    "body": [
+      "import PropTypes from 'prop-types';",
+      "$1"
+    ],
+    "description": "Import prop types module"
   }
 }

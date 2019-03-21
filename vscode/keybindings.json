@@ -89,5 +89,10 @@
   {
     "key": "ctrl+shift+l",
     "command": "workbench.action.closePanel"
+  },
+  {
+    "key": "cmd+alt+b",
+    "command": "multiCommand.addConstructorBinding",
+    "when": "editorTextFocus"
   }
 ]

@@ -9,8 +9,8 @@
   "javascript.format.enable": true,
   "files.trimTrailingWhitespace": true,
   "editor.rulers": [
-      80,
-      120
+    80,
+    120
   ],
   "editor.renderWhitespace": "boundary",
   "editor.renderLineHighlight": "all",
@@ -26,18 +26,18 @@
   "html.format.indentHandlebars": true,
   "html.format.extraLiners": "",
   "files.exclude": {
-      "**/.git": true,
-      "**/.DS_Store": true,
-      "**/node_modules": true,
-      "**/vendor": true
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/vendor": true
   },
   "search.exclude": {
-      "**/node_modules": true,
-      "**/vendor": true
+    "**/node_modules": true,
+    "**/vendor": true
   },
   "files.watcherExclude": {
-      "/node_modules/": true,
-      "/vendor/": true
+    "/node_modules/": true,
+    "/vendor/": true
   },
   "window.zoomLevel": 0,
   "editor.tabSize": 2,
@@ -49,27 +49,43 @@
   "workbench.editor.showTabs": true,
   "multiCommand.commands": [
     {
-        "command": "multiCommand.semiColonAndNewLine",
-        "sequence": [
-            "cursorLineEnd",
-            {"command": "type", "args": {"text": ";"}},
-            "editor.action.insertLineAfter",
-        ]
+      "command": "multiCommand.semiColonAndNewLine",
+      "sequence": [
+        "cursorLineEnd",
+        {"command": "type", "args": {"text": ";"}},
+        "editor.action.insertLineAfter",
+      ]
     },
     {
-        "command": "multiCommand.consoleLogCurrentVariable",
-        "sequence": [
-            "cursorWordStartLeft",
-            "cursorWordEndRightSelect",
-            "editor.action.clipboardCopyAction",
-            "cursorLineEnd",
-            "editor.action.insertLineAfter",
-            {"command": "editor.action.insertSnippet", "args": {"name": "Print object to console"}},
-            "editor.action.clipboardPasteAction",
-            "removeSecondaryCursors",
-            "cursorLineEnd",
-            "editor.action.insertLineAfter",
-        ]
+      "command": "multiCommand.consoleLogCurrentVariable",
+      "sequence": [
+        "cursorWordStartLeft",
+        "cursorWordEndRightSelect",
+        "editor.action.clipboardCopyAction",
+        "cursorLineEnd",
+        "editor.action.insertLineAfter",
+        {"command": "editor.action.insertSnippet", "args": {"name": "Print object to console"}},
+        "editor.action.clipboardPasteAction",
+        "removeSecondaryCursors",
+        "cursorLineEnd",
+        "editor.action.insertLineAfter",
+      ]
+    },
+    {
+      "command": "multiCommand.addConstructorBinding",
+      "sequence": [
+        "cursorWordStartLeft",
+        "cursorWordEndRightSelect",
+        "editor.action.clipboardCopyAction",
+        "deleteAllLeft",
+        {"command": "editor.action.insertSnippet", "args": {"name": "Bind method"}},
+        "editor.action.clipboardPasteAction",
+        "removeSecondaryCursors",
+        "cursorLineEnd",
+      ]
     }
-]
+  ],
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
 }
