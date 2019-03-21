@@ -35,6 +35,7 @@ code --install-extension robertohuertasm.vscode-icons
 code --install-extension Rubymaniac.vscode-paste-and-indent
 code --install-extension ryu1kn.partial-diff
 code --install-extension ryuta46.multi-command
+code --install-extension shardulm94.trailing-spaces
 code --install-extension SirTori.indenticator
 code --install-extension sleistner.vscode-fileutils
 code --install-extension slevesque.vscode-multiclip
