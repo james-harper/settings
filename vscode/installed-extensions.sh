@@ -30,6 +30,7 @@ code --install-extension NuclleaR.vscode-extension-auto-import
 code --install-extension OfHumanBondage.react-proptypes-intellisense
 code --install-extension pajdziu.trailingwhitespacehighlighter
 code --install-extension pnp.polacode
+code --install-extension pranaygp.vscode-css-peek
 code --install-extension robertohuertasm.vscode-icons
 code --install-extension Rubymaniac.vscode-paste-and-indent
 code --install-extension ryu1kn.partial-diff
