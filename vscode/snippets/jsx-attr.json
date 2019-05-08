@@ -7,7 +7,7 @@
     "description": "margin helper"
   },
   "padding": {
-    "prefix": "pdd",
+    "prefix": "pdg",
     "body": [
       "m--padding-${1|top,right,bottom,left,h,v|}-${2|0,5,10,15,20,25,30,35,40,45,50|}"
     ],
