@@ -57,6 +57,14 @@
       ]
     },
     {
+      "command": "multiCommand.commaAndNewLine",
+      "sequence": [
+        "cursorLineEnd",
+        {"command": "type", "args": {"text": ","}},
+        "editor.action.insertLineAfter",
+      ]
+    },
+    {
       "command": "multiCommand.consoleLogCurrentVariable",
       "sequence": [
         "cursorWordStartLeft",
