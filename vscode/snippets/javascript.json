@@ -47,6 +47,35 @@
     "prefix": "ust",
     "body": [
       "const [$1, set${1/(.)/${1:/upcase}/}] = useState($2);"
-    ]
+    ],
+    "description": "React useState"
+  },
+  "axios get": {
+    "prefix": "axg",
+    "body": [
+      "const $1 = async () => {",
+      "  try {",
+      "    const response = await axios.get($2);",
+      "    console.log(response, response.data.data);",
+      "  } catch (error) {",
+      "    console.log(error);",
+      "  }",
+      "};"
+    ],
+    "description": "axios get request"
+  },
+  "axios post": {
+    "prefix": "axp",
+    "body": [
+      "const $1 = async () => {",
+      "  try {",
+      "    const response = await axios.post($2, ${3:{}});",
+      "    console.log(response, response.data.data);",
+      "  } catch (error) {",
+      "    console.log(error);",
+      "  }",
+      "};"
+    ],
+    "description": "axios post request"
   }
 }
