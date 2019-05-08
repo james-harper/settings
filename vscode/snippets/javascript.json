@@ -37,5 +37,10 @@
       "export default $TM_FILENAME_BASE;\n"
     ],
     "description": "Create a new functional component"
+  },
+  "No-op": {
+    "prefix": "noop",
+    "body": ["() => {}"],
+    "description": "Empty function"
   }
 }
