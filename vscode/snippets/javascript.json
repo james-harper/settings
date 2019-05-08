@@ -50,19 +50,19 @@
     ],
     "description": "React useState"
   },
-  "axios get": {
+  "axios": {
     "prefix": "axg",
     "body": [
       "const $1 = async () => {",
       "  try {",
-      "    const response = await axios.get($2);",
+      "    const response = await axios.${2|get,post,put,delete|}($3);",
       "    console.log(response, response.data.data);",
       "  } catch (error) {",
       "    console.log(error);",
       "  }",
       "};"
     ],
-    "description": "axios get request"
+    "description": "axios request"
   },
   "axios post": {
     "prefix": "axp",
