@@ -82,6 +82,11 @@
     "when": "editorTextFocus"
   },
   {
+    "key": "cmd+alt+,",
+    "command": "multiCommand.commaAndNewLine",
+    "when": "editorTextFocus"
+  },
+  {
     "key": "cmd+alt+c",
     "command": "multiCommand.consoleLogCurrentVariable",
     "when": "editorTextFocus"
