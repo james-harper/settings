@@ -20,5 +20,22 @@
       "$1"
     ],
     "description": "Import prop types module"
+  },
+  "New Component": {
+    "prefix": "cmp",
+    "body": [
+      "import React from 'react';",
+      "import PropTypes from 'prop-types';\n",
+      "const $TM_FILENAME_BASE = ({ $1 }) => {",
+      " console.log('$TM_FILENAME_BASE');\n",
+      " return (",
+      "   <div>$2</div>",
+      " );",
+      "};\n",
+      "$TM_FILENAME_BASE.defaultProps = {\n  $1\n};\n",
+      "$TM_FILENAME_BASE.propTypes = {\n  $1\n};\n",
+      "export default $TM_FILENAME_BASE;\n"
+    ],
+    "description": "Create a new functional component"
   }
 }
