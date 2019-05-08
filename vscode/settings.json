@@ -94,6 +94,7 @@
     }
   ],
   "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.snippetSuggestions": "top",
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "emmet.includeLanguages": {
