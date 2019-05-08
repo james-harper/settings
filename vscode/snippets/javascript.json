@@ -42,5 +42,11 @@
     "prefix": "noop",
     "body": ["() => {}"],
     "description": "Empty function"
+  },
+  "useState": {
+    "prefix": "ust",
+    "body": [
+      "const [$1, set${1/(.)/${1:/upcase}/}] = useState($2);"
+    ]
   }
 }
