@@ -341,3 +341,7 @@ npmi () {
 
 alias hnews="open https://news.ycombinator.com/news"
 alias bbc="open https://www.bbc.co.uk/"
+
+phone() {
+  open https://who-called.co.uk/Number/$1
+}
