@@ -92,6 +92,22 @@ pr () {
   open "https://github.com/$repo/pull/new/$branch?expand=1"
 }
 
+# Open bitbucket PR
+prb () {
+  local repo=`git remote -v | grep -m 1 "(push)" | sed -e "s/.*git@bitbucket.org[:/]\(.*\)\.git.*/\1/"`
+  local branch=`git name-rev --name-only HEAD`
+  echo "... creating pull request for branch \"$branch\" in \"$repo\""
+  open "https://bitbucket.org/$repo/pull-requests/new?source=$branch&event_source=branch_list"
+}
+
+# Open Gitlab PR
+prg () {
+  local repo=`git remote -v | grep -m 1 "(push)" | sed -e "s/.*git@gitlab.com[:/]\(.*\)\.git.*/\1/"`
+  local branch=`git name-rev --name-only HEAD`
+  echo "... creating pull request for branch \"$branch\" in \"$repo\""
+  open "https://gitlab.com/$repo/-/merge_requests/new?merge_request%5Bsource_branch%5D=$branch&merge_request%5Btarget_branch%5D=master"
+}
+
 alias h='history'
 alias histgrep='history | grep'
 alias hs='history | grep -i $1'
