@@ -86,6 +86,11 @@ parse_git_branch() {
   git push --set-upstream origin $BRANCH
 }
 
+# log a git branch - show commit hashes
+glo () {
+  git log $1 --oneline
+}
+
 # open pr page on github for current branch
 pr () {
   local repo=`git remote -v | grep -m 1 "(push)" | sed -e "s/.*github.com[:/]\(.*\)\.git.*/\1/"`
