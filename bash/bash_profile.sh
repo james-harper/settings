@@ -102,6 +102,14 @@ prb () {
   open "https://bitbucket.org/$repo/pull-requests/new?source=$branch&event_source=branch_list"
 }
 
+# Open Bitbucket branch
+brb() {
+  local repo=`git remote -v | grep -m 1 "(push)" | sed -e "s/.*git@bitbucket.org[:/]\(.*\)\.git.*/\1/"`
+  local branch=`git name-rev --name-only HEAD`
+  echo "...Opening \"$branch\" in \"$repo\""
+  open "https://bitbucket.org/$repo/branch/$branch#commits"
+}
+
 # Open Gitlab PR
 prg () {
   local repo=`git remote -v | grep -m 1 "(push)" | sed -e "s/.*git@gitlab.com[:/]\(.*\)\.git.*/\1/"`
