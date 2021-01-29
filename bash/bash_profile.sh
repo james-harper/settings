@@ -360,3 +360,7 @@ alias bbc="open https://www.bbc.co.uk/"
 phone() {
   open https://who-called.co.uk/Number/$1
 }
+
+alias dcu="docker-compose up"
+alias dcb="docker-compose up --build"
+alias dcd="docker-compose down"
