@@ -364,3 +364,22 @@ phone() {
 alias dcu="docker-compose up"
 alias dcb="docker-compose up --build"
 alias dcd="docker-compose down"
+
+# Run program on Docker Container - defaults to shell
+dssh() {
+  local PROG=${2:-sh}
+  docker exec -it $1 $PROG
+}
+
+# Search for Docker container ID by name
+dfind() {
+  docker ps --filter "name=$1" --format "{{.ID}}"
+}
+
+# Find docker container by name and open a shell
+ds() {
+  ID=$(dfind $1)
+  echo "connecting to docker container: $ID ($1)"
+  dssh $ID
+}
+
