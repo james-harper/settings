@@ -395,3 +395,16 @@ ds() {
   dssh $ID
 }
 
+# Dropbox
+function drp () {
+  local DROPBOX=~/Dropbox
+  if [ $# -eq 0 ]
+    then
+      cd $DROPBOX
+  else
+    local SUBDIR=${2:-""}
+    local NEWDIR=$DROPBOX/$SUBDIR
+    mkdir -pv "$NEWDIR"
+    cp -av $1 $NEWDIR
+  fi
+}
