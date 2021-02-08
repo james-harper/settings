@@ -353,6 +353,8 @@ function add_alias {
   fi
 }
 
+alias ua="unalias"
+
 npmi () {
   local packagename=$(echo ${@} | sed -E 's/(\-+[a-zA-Z0-9]+| )//g')
   local opt
