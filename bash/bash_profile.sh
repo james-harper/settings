@@ -51,10 +51,19 @@ cdf () {
   fi
 }
 
+# git commit (with or without message)
+function gc () {
+  if [ $# -eq 0 ]
+    then
+      git commit
+  else
+    git commit -m "$1"
+  fi
+}
+
 alias ga='git add'
 alias ga.='git add .'
 alias gb='git branch'
-alias gc='git commit -m'
 alias gco='git checkout'
 alias g-='git checkout -'
 alias gts='git status'
