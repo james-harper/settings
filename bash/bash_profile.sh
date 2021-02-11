@@ -88,6 +88,24 @@ alias chrome="open -a google\ chrome"
 alias finder_s='defaults write com.apple.Finder AppleShowAllFiles TRUE; killAll Finder'
 alias finder_h='defaults write com.apple.Finder AppleShowAllFiles FALSE; killAll Finder'
 alias here='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
+
+# moves file to ~/.Trash
+# (use instead of rm)
+function trash() {
+   if [ $# -eq 0 ]
+   then
+       echo Usage: trash FILE...
+       return 1
+   fi
+   local DATE=$(date +%Y%m%d)
+   [ -d "${HOME}/.Trash/${DATE}" ] || mkdir -p ${HOME}/.Trash/${DATE}
+   for FILE in "$@"
+   do
+     mv "${FILE}" "${HOME}/.Trash/${DATE}"
+     echo "${FILE} trashed!"
+   done
+}
+
 # open current finder directory in terminal
 cdf () {
   target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
