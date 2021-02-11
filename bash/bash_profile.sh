@@ -337,15 +337,22 @@ export HISTFILESIZE=$HISTSIZE
 shopt -s histappend
 
 function get_prompt_branch() {
-  IS_GIT_DIRECTORY=$(git rev-parse --is-inside-work-tree > /dev/null 2>&1;)
-  BASIC_PROMPT="\[\e[33m\]\w \\$\[\e[m\] ";
-  if [ IS_GIT_DIRECTORY ]; then
-    BRANCH="\[\e[32m\]$(trim $(parse_git_branch))\[\e[m\]";
-    export PS1="${BRANCH} ${BASIC_PROMPT}";
+  YELLOW="\[\033[33m\]"
+  GREEN="\[\e[32m\]"
+  NORMAL="\[\e[m\]"
+  GREY="\[\033[38;5;242m\]"
+
+  BASIC_PROMPT="${YELLOW}\w \\$ ${NORMAL}";
+  DATE="${GREY}[\$(date -u +\"%H:%M:%S\")]:"
+
+  if [ -d .git ]; then
+    BRANCH="${GREEN}$(trim $(parse_git_branch))${NORMAL}";
+    export PS1="${DATE}${BRANCH} ${BASIC_PROMPT}";
   else
-    export PS1="${BASIC_PROMPT}";
+    export PS1="${DATE}${BASIC_PROMPT}";
   fi
 }
+
 
 export PROMPT_COMMAND=get_prompt_branch
 export PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND"
