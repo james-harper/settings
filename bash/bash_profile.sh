@@ -16,6 +16,37 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 
+# artisan tab completion
+# works for `php artisan` as well as my personal `art` alias
+function _artisan() {
+  function _registerArtisanTabCompletion() {
+    COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
+    COMMANDS=`php artisan --raw --no-ansi list | sed "s/[[:space:]].*//g"`
+    COMPREPLY=(`compgen -W "$COMMANDS" -- "${COMP_WORDS[COMP_CWORD]}"`)
+  }
+
+  if [ -f artisan ]; then
+    if [ $1 = "art" ]; then
+      _registerArtisanTabCompletion
+      return 0
+    fi
+
+    local arg="${COMP_LINE#php }"
+    case "$arg" in
+      artisan*)
+        _registerArtisanTabCompletion
+        ;;
+      *)
+        COMPREPLY=( $(compgen -o default -- "${COMP_WORDS[COMP_CWORD]}") )
+        ;;
+      esac
+    return 0
+  fi
+}
+
+complete -F _artisan php
+complete -F _artisan art
+
 ## Tab improvements
 bind 'set completion-ignore-case on'
 bind 'set show-all-if-ambiguous on'
