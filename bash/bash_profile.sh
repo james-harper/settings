@@ -343,7 +343,7 @@ function get_prompt_branch() {
   GREY="\[\033[38;5;242m\]"
 
   BASIC_PROMPT="${YELLOW}\w \\$ ${NORMAL}";
-  DATE="${GREY}[\$(date -u +\"%H:%M:%S\")]:"
+  DATE="${GREY}[\t]:"
 
   if [ -d .git ]; then
     BRANCH="${GREEN}$(trim $(parse_git_branch))${NORMAL}";
