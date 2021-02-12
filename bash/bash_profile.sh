@@ -475,3 +475,13 @@ function drp () {
     cp -av $1 $NEWDIR
   fi
 }
+
+# Open a github repo in vscode (temporarily)
+function ghcode() {
+  local repo=$1
+  [[ ! $repo =~ "https://*" ]] && repo="https://github.com/${repo}"
+  local temp="$(mktemp -d)"
+  git clone --depth=1 "${repo}" "${temp}"
+  code --wait -n "${temp}"
+  rm -rf "${temp}"
+}
