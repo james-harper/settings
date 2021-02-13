@@ -88,6 +88,11 @@ alias chrome="open -a google\ chrome"
 alias finder_s='defaults write com.apple.Finder AppleShowAllFiles TRUE; killAll Finder'
 alias finder_h='defaults write com.apple.Finder AppleShowAllFiles FALSE; killAll Finder'
 alias here='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
+alias copyLastCmd='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | pbcopy'
+alias firefox="open -a firefox"
+# Mute/Unmute the system volume. Plays nice with all other volume settings.
+alias mute="osascript -e 'set volume output muted true'"
+alias unmute="osascript -e 'set volume output muted false'"
 
 # moves file to ~/.Trash
 # (use instead of rm)
