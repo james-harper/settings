@@ -388,9 +388,31 @@ export HISTFILESIZE=$HISTSIZE
 # new terminal, you have old session history
 shopt -s histappend
 
+# get git upstream branch
+# assuming that we are branching from master as default
+function __upstream() {
+  local BRANCH=`git name-rev --name-only HEAD`
+  local UP=$(git rev-parse --abbrev-ref $BRANCH@{upstream} 2> /dev/null)
+
+  if [ -z "$UP" ]; then
+    echo "origin/master"
+  else
+    echo $UP
+  fi
+}
+
+# Check how many commits behind/ahead of the upstream
+# the current git branch is
+function __check_commit_status() {
+  local UPSTREAM=$(__upstream)
+  git rev-list --left-right --count $UPSTREAM...HEAD
+}
+
 function get_prompt_branch() {
   YELLOW="\[\033[33m\]"
   GREEN="\[\e[32m\]"
+  RED="\[\e[91m\]"
+  LGREEN="\[\e[92m\]"
   NORMAL="\[\e[m\]"
   GREY="\[\033[38;5;242m\]"
 
@@ -398,13 +420,19 @@ function get_prompt_branch() {
   DATE="${GREY}[\t]:"
 
   if [ -d .git ]; then
-    BRANCH="${GREEN}$(trim $(parse_git_branch))${NORMAL}";
-    export PS1="${DATE}${BRANCH} ${BASIC_PROMPT}";
+    local COMMITS=$(__check_commit_status 2> /dev/null)
+    local BEHIND=$(echo $COMMITS | cut -f1 -d" ")
+    local AHEAD=$(echo $COMMITS | cut -f2 -d" ")
+
+    local BRANCHNAME=$(trim $(parse_git_branch))
+    local BRANCH="${GREEN}${BRANCHNAME}${NORMAL}";
+
+    local COMMITSTATUS="${GREY}(${RED}-${BEHIND}${GREY}|${LGREEN}+${AHEAD}${GREY})${NORMAL}"
+    export PS1="${DATE}${BRANCH}${COMMITSTATUS} ${BASIC_PROMPT}";
   else
     export PS1="${DATE}${BASIC_PROMPT}";
   fi
 }
-
 
 export PROMPT_COMMAND=get_prompt_branch
 export PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND"
