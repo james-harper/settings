@@ -33,5 +33,7 @@ brew install python@3.9
 brew install siege
 brew install the_silver_searcher
 brew install tldr
+brew install tree
+brew install watch
 brew install wget
 brew install xz
