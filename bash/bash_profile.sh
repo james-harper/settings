@@ -173,9 +173,67 @@ glo () {
   git log $1 --oneline
 }
 
+# Get the platform a git repo is hosted on
+_get_git_hosting() {
+  local ORIGIN=$(git config --get remote.origin.url)
+  case "$ORIGIN" in
+    *github*)
+      echo "github"
+      ;;
+    *bitbucket*)
+      echo "bitbucket"
+      ;;
+    *gitlab*)
+      echo "gitlab"
+      ;;
+  esac
+}
+
+# Open the current git branch in web browser
+gurl() {
+  local SERVICE=$(_get_git_hosting)
+  local BRANCH=`git name-rev --name-only HEAD`
+
+  case "$SERVICE" in
+    "github")
+      local REPO=$(_get_repo --github)
+      open "https://github.com/$REPO/tree/$BRANCH"
+      ;;
+    "bitbucket")
+      local REPO=$(_get_repo --bitbucket)
+      open "https://bitbucket.org/$REPO/branch/$BRANCH#commits"
+      ;;
+    "gitlab")
+      local REPO=$(_get_repo --gitlab)
+      open "https://gitlab.com/$REPO/-/tree/$BRANCH"
+      ;;
+  esac
+}
+
+# Get the name of a git repo in the format (organisation/name)
+function _get_repo() {
+  local TYPE="$1"
+  local REGEX
+
+  case "$TYPE" in
+    "--github")
+      REGEX="s/.*github.com[:/]\(.*\)\.git.*/\1/"
+      ;;
+    "--bitbucket")
+      REGEX="s/.*git@bitbucket.org[:/]\(.*\)\.git.*/\1/"
+      ;;
+    "--gitlab")
+      REGEX="s/.*git@gitlab.com[:/]\(.*\)\.git.*/\1/"
+      ;;
+    esac
+
+  local REPO=`git remote -v | grep -m 1 "(push)" | sed -e $REGEX`
+  echo $REPO
+}
+
 # open pr page on github for current branch
 pr () {
-  local repo=`git remote -v | grep -m 1 "(push)" | sed -e "s/.*github.com[:/]\(.*\)\.git.*/\1/"`
+  local repo=$(_get_repo --github)
   local branch=`git name-rev --name-only HEAD`
   echo "... creating pull request for branch \"$branch\" in \"$repo\""
   open "https://github.com/$repo/pull/new/$branch?expand=1"
@@ -183,23 +241,15 @@ pr () {
 
 # Open bitbucket PR
 prb () {
-  local repo=`git remote -v | grep -m 1 "(push)" | sed -e "s/.*git@bitbucket.org[:/]\(.*\)\.git.*/\1/"`
+  local repo=$(_get_repo --bitbucket)
   local branch=`git name-rev --name-only HEAD`
   echo "... creating pull request for branch \"$branch\" in \"$repo\""
   open "https://bitbucket.org/$repo/pull-requests/new?source=$branch&event_source=branch_list"
 }
 
-# Open Bitbucket branch
-brb() {
-  local repo=`git remote -v | grep -m 1 "(push)" | sed -e "s/.*git@bitbucket.org[:/]\(.*\)\.git.*/\1/"`
-  local branch=`git name-rev --name-only HEAD`
-  echo "...Opening \"$branch\" in \"$repo\""
-  open "https://bitbucket.org/$repo/branch/$branch#commits"
-}
-
 # Open Gitlab PR
 prg () {
-  local repo=`git remote -v | grep -m 1 "(push)" | sed -e "s/.*git@gitlab.com[:/]\(.*\)\.git.*/\1/"`
+  local repo=$(_get_repo --gitlab)
   local branch=`git name-rev --name-only HEAD`
   echo "... creating pull request for branch \"$branch\" in \"$repo\""
   open "https://gitlab.com/$repo/-/merge_requests/new?merge_request%5Bsource_branch%5D=$branch&merge_request%5Btarget_branch%5D=master"
