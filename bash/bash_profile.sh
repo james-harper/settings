@@ -1,3 +1,4 @@
+# @TODO: Clean up (move aliases to .bash_aliases, completions to own file, etc)
 source ~/.bashrc
 alias composer="php ~/composer.phar"
 alias art='php artisan'
