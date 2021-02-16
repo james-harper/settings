@@ -519,7 +519,13 @@ function drp () {
 # Open a github repo in vscode (temporarily)
 function ghcode() {
   local repo=$1
+  if [ $# -eq 2 ]
+   then
+      repo=$1/$2
+  fi
   [[ ! $repo =~ "https://*" ]] && repo="https://github.com/${repo}"
+
+  echo $repo
   local temp="$(mktemp -d)"
   git clone --depth=1 "${repo}" "${temp}"
   code --wait -n "${temp}"
