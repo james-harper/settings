@@ -57,6 +57,12 @@ function _artisan() {
 complete -F _artisan php
 complete -F _artisan art
 
+__git_complete gco _git_checkout
+__git_complete gdf _git_diff
+__git_complete glg _git_log
+__git_complete glo _git_log
+__git_complete merge _git_merge
+
 ## Tab improvements
 bind 'set completion-ignore-case on'
 bind 'set show-all-if-ambiguous on'
