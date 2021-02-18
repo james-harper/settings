@@ -99,5 +99,29 @@
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
-  }
+  },
+  "files.associations": {
+    "*.blade.php": "html",
+    "*.php": "php"
+   },
+  "php.suggest.basic": false,
+  "editor.quickSuggestions": { "comments": true },
+  "intelephense.telemetry.enabled": false,
+  "intelephense.format.enable": true,
+  "intelephense.completion.triggerParameterHints": true,
+  "intelephense.completion.insertUseDeclaration": true,
+  "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
+  "intelephense.trace.server": "messages",
+  "intelephense.files.exclude": [
+      "**/.git/**",
+      "**/.svn/**",
+      "**/.hg/**",
+      "**/CVS/**",
+      "**/.DS_Store/**",
+      "**/node_modules/**",
+      "**/bower_components/**",
+      "**/storage",
+      "**/storage/**",
+      "**/vendor/**/{Test,test,Tests,tests}/**/*Test.php"
+  ]
 }
