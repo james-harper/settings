@@ -47,6 +47,7 @@
   "editor.suggest.localityBonus": true,
   "workbench.tree.horizontalScrolling": true,
   "workbench.editor.showTabs": true,
+  "terminal.integrated.shell.osx": "/bin/bash",
   "multiCommand.commands": [
     {
       "command": "multiCommand.semiColonAndNewLine",
