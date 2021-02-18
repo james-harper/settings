@@ -106,6 +106,13 @@
     "*.php": "php"
    },
   "php.suggest.basic": false,
+  "php-cs-fixer.executablePath": "${extensionPath}/php-cs-fixer.phar",
+  "[php]": {
+    "editor.defaultFormatter": "fterrag.vscode-php-cs-fixer"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
   "editor.quickSuggestions": { "comments": true },
   "intelephense.telemetry.enabled": false,
   "intelephense.format.enable": true,
