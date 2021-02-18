@@ -1,6 +1,7 @@
 code --install-extension alefragnani.Bookmarks
 code --install-extension amiralizadeh9480.laravel-extra-intellisense
 code --install-extension austenc.laravel-blade-spacer
+code --install-extension bmewburn.vscode-intelephense-client
 code --install-extension bradlc.vscode-tailwindcss
 code --install-extension christian-kohler.path-intellisense
 code --install-extension cjhowe7.laravel-blade
