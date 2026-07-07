@@ -90,6 +90,6 @@ alias dcps="docker compose ps"
 # alias art="docker compose exec -it <php-container> php artisan"
 # alias npm="docker compose exec -it <node-container> npm"
 # ──────────────────────────────────────────────────────────# 6. DYNAMIC NATIVE PROMPT STATEMENT# ──────────────────────────────────────────────────────────# Displays [User@WSL-Machine: CurrentDir] (Active Git Branch)if [ -f /usr/lib/git-core/git-sh-prompt ]; then
-    . /usr/lib/git-core/git-sh-prompt
+. /usr/lib/git-core/git-sh-prompt
 export PS1='\[\e[32m\][\u@wsl: \W]\[\e[33m\]$(__git_ps1 " (%s)")\[\e[0m\]\$ 'else
 export PS1='\[\e[32m\][\u@wsl: \W]\[\e[0m\]\$ 'fi
