@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+URL=$(git config --get remote.origin.url)
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [ -z "$URL" ] || [ -z "$BRANCH" ]; then
+    echo "❌ Error: Not inside a valid Git repository context."
+    exit 1fi
+
+REPO_PATH=$(echo "$URL" | sed -E -e 's/git@.+[:\/]//' -e 's/https?:\/\/[^\/]+\///' -e 's/\.git$//')
+if [[ "$URL" == *github.com* ]]; then
+    echo "🚀 Launching GitHub Pull Request for [ $BRANCH ]..."
+    wslview "https://github.com"elif [[ "$URL" == *bitbucket.org* ]]; then
+    echo "🚀 Launching Bitbucket Pull Request for [ $BRANCH ]..."
+    wslview "https://bitbucket.org"elif [[ "$URL" == *gitlab.com* ]]; then
+    echo "🚀 Launching GitLab Merge Request for [ $BRANCH ]..."
+    wslview "https://gitlab.com"else
+    echo "⚠️ Unknown provider. URL: https://$REPO_PATH"fi
