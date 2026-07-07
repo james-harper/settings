@@ -13,7 +13,7 @@ bind 'set show-all-if-ambiguous on'
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 # ──────────────────────────────────────────────────────────# 2. ADVANCED RECURSIVE HISTORY ENGINE# ──────────────────────────────────────────────────────────# Creates structured, permanent daily logs of your terminal historyif [ ! -d ~/.history/$(date -u +%Y/%m/) ]; then
-    mkdir -p ~/.history/$(date -u +%Y/%m/)fi
+mkdir -p ~/.history/$(date -u +%Y/%m/)fi
 
 export HISTFILE="${HOME}/.history/$(date -u '+%Y/%m/%d %H.%M.%S')"
 export HISTCONTROL=ignoreboth:erasedups
@@ -87,11 +87,8 @@ alias dcdown="docker compose down"
 alias dclogs="docker compose logs -f"
 alias dcps="docker compose ps"
 # Automatically routes paths straight into active containers
-alias art="docker compose exec -it crm-php php artisan"
-alias artisan="docker compose exec -it crm-php php artisan"
-alias composer="docker compose exec -it crm-php composer"
-alias npm="docker compose exec -it crm-websocket npm"
-alias npm-fresh="docker compose run --rm crm-websocket npm install"
+# alias art="docker compose exec -it <php-container> php artisan"
+# alias npm="docker compose exec -it <node-container> npm"
 # ──────────────────────────────────────────────────────────# 6. DYNAMIC NATIVE PROMPT STATEMENT# ──────────────────────────────────────────────────────────# Displays [User@WSL-Machine: CurrentDir] (Active Git Branch)if [ -f /usr/lib/git-core/git-sh-prompt ]; then
     . /usr/lib/git-core/git-sh-prompt
 export PS1='\[\e[32m\][\u@wsl: \W]\[\e[33m\]$(__git_ps1 " (%s)")\[\e[0m\]\$ 'else
