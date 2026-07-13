@@ -1,0 +1,5 @@
+#!/bin/bash
+
+alias here='explorer .'
+alias copyLastCmd='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | clip'
+alias hosts='powershell -Command "Start-Process notepad \"C:\Windows\System32\drivers\etc\hosts\" -Verb RunAs"'

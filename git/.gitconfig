@@ -1,26 +1,9 @@
-# Map shorthand variables
-git config --global alias.a "add"
-git config --global alias.a. "add ."
-git config --global alias.b "branch"
-git config --global alias.ts "status"
-git config --global alias.df "diff"
-git config --global alias.dfs "diff --staged"
-git config --global alias.sw "switch"
-git config --global alias.co "checkout"
-git config --global alias.g- "checkout -"
-git config --global alias.master "checkout master"
-git config --global alias.res "reset --hard"
-git config --global alias.cp "cherry-pick"
-git config --global alias.merge "merge"
-git config --global alias.clone "clone"
-
-# Advanced shortcuts with direct arguments
-git config --global alias.c "commit -m"
-git config --global alias.p "push"
-git config --global alias.po "push origin"
-git config --global alias.pl "pull"
-git config --global alias.fa "fetch --all --prune"
-git config --global alias.lg "log --oneline --graph --decorate"
-
-# 3. Auto-calculate upstreams on 1st push
-git config --global push.autoSetupRemote true
+[user]
+email = jameswilliamharper@gmail.com
+name = james-harper
+[core]
+autocrlf = true
+[color]
+ui = true
+[push]
+autoSetupRemote = true

@@ -1,0 +1,31 @@
+#!/bin/bash
+# ──────────────────────────────────────────────────────────
+# LINUX-EXCLUSIVE DOTFILES EXTENSIONS (~/.bash_linux)
+# ──────────────────────────────────────────────────────────
+
+alias here='xdg-open .'
+alias hosts='sudo nano /etc/hosts'
+alias copyLastCmd="fc -ln -1 | awk '{\$1=\$1}1' ORS='' | xclip -sel clip"
+
+# Enable native system package tracking aliases (if available)
+alias apt-up='sudo apt update && sudo apt upgrade -y'
+
+# Standardize native system file system location utilities
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
+alias psg='ps ax | grep -v grep | grep -i -e VSZ -e' # BROKEN ON WINDOWS
+pid() { lsof -t -c "$@" ; }                         # BROKEN ON WINDOWS
+port() { lsof -i tcp:"$@"; }
+
+#   myps: List processes owned by my user:
+#   ------------------------------------------------------------
+myps() { ps $@ -u $USER -o pid,%cpu,%mem,start,time,bsdtime,command ; }
+
+#   ttop:  Recommended 'top' invocation to minimize resources
+#   ------------------------------------------------------------
+#       Taken from this macosxhints article
+#       http://www.macosxhints.com/article.php?story=20060816123853639
+#   ------------------------------------------------------------
+alias ttop="top -R -F -s 10 -o rsize"

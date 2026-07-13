@@ -1,0 +1,48 @@
+#!/bin/bash
+# ──────────────────────────────────────────────────────────
+# MAC-EXCLUSIVE DOTFILES EXTENSIONS (~/.bash_mac)
+# ──────────────────────────────────────────────────────────
+
+# GUI/Finder navigation & file visibility
+alias here='open ./'
+alias o='open'
+alias finder_s='defaults write com.apple.Finder AppleShowAllFiles TRUE; killAll Finder'
+alias finder_h='defaults write com.apple.Finder AppleShowAllFiles FALSE; killAll Finder'
+
+# Clipboard and Application shortcuts
+alias copyLastCmd='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | pbcopy'
+alias chrome="open -a google\ chrome"
+
+# Native Apple System Audio Controls
+alias mute="osascript -e 'set volume output muted true'"
+alias unmute="osascript -e 'set volume output muted false'"
+
+alias hosts='sudo nano /etc/hosts'
+
+spotlight () { mdfind "kMDItemDisplayName == '$@'wc"; }
+# Safe Trash redirection (Moves to native Apple trash)
+function trash() {
+    [ $# -eq 0 ] && return
+    command mv "$@" ~/.Trash
+}
+
+# Homebrew completion and PATH updates
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+alias psg='ps ax | grep -v grep | grep -i -e VSZ -e' # BROKEN ON WINDOWS
+pid() { lsof -t -c "$@" ; }                         # BROKEN ON WINDOWS
+port() { lsof -i tcp:"$@"; }
+
+#   myps: List processes owned by my user:
+#   ------------------------------------------------------------
+myps() { ps $@ -u $USER -o pid,%cpu,%mem,start,time,bsdtime,command ; }
+
+#   ttop:  Recommended 'top' invocation to minimize resources
+#   ------------------------------------------------------------
+#       Taken from this macosxhints article
+#       http://www.macosxhints.com/article.php?story=20060816123853639
+#   ------------------------------------------------------------
+alias ttop="top -R -F -s 10 -o rsize"
