@@ -149,7 +149,7 @@ alias gdev='git checkout develop && git pull origin develop'
 # ──────────────────────────────────────────────────────────
 # 5. INTEGRATED PLATFORM WEB UTILITIES
 # ──────────────────────────────────────────────────────────
-_get_git_hosting() { # Parses remote origins to flag host type
+__get_git_hosting() { # Parses remote origins to flag host type
   local ORIGIN=$(git config --get remote.origin.url)
   case "$ORIGIN" in
     *github*)    echo "github" ;;
@@ -158,7 +158,7 @@ _get_git_hosting() { # Parses remote origins to flag host type
   esac
 }
 
-_get_repo() { # Cleans upstream markers returning standardized organization/repository text
+___get_repo() { # Cleans upstream markers returning standardized organization/repository text
   local TYPE="$1"
   local REGEX
   case "$TYPE" in
@@ -172,19 +172,19 @@ _get_repo() { # Cleans upstream markers returning standardized organization/repo
 
 # Web integration router targeting active git repositories
 gurl() {
-  local SERVICE=$(_get_git_hosting)
+  local SERVICE=$(__get_git_hosting)
   local BRANCH=$(git name-rev --name-only HEAD)
   case "$SERVICE" in
-    "github")    open "https://github.com(_get_repo --github)/tree/$BRANCH" ;;
-    "bitbucket") open "https://bitbucket.org(_get_repo --bitbucket)/branch/$BRANCH#commits" ;;
-    "gitlab")    open "https://gitlab.com(_get_repo --gitlab)/-/tree/$BRANCH" ;;
+    "github")    open "https://github.com(__get_repo --github)/tree/$BRANCH" ;;
+    "bitbucket") open "https://bitbucket.org(__get_repo --bitbucket)/branch/$BRANCH#commits" ;;
+    "gitlab")    open "https://gitlab.com(__get_repo --gitlab)/-/tree/$BRANCH" ;;
   esac
 }
 
 # Automatic PR setup loops forwarding active tracking targets to remote hosting providers
-pr()  { open "https://github.com(_get_repo --github)/pull/new/$(git name-rev --name-only HEAD)?expand=1"; }
-prb() { open "https://bitbucket.org(_get_repo --bitbucket)/pull-requests/new?source=$(git name-rev --name-only HEAD)&event_source=branch_list"; }
-prg() { open "https://gitlab.com(_get_repo --gitlab)/-/merge_requests/new?merge_request%5Bsource_branch%5D=$(git name-rev --name-only HEAD)&merge_request%5Btarget_branch%5D=master"; }
+pr()  { open "https://github.com(__get_repo --github)/pull/new/$(git name-rev --name-only HEAD)?expand=1"; }
+prb() { open "https://bitbucket.org(__get_repo --bitbucket)/pull-requests/new?source=$(git name-rev --name-only HEAD)&event_source=branch_list"; }
+prg() { open "https://gitlab.com(__get_repo --gitlab)/-/merge_requests/new?merge_request%5Bsource_branch%5D=$(git name-rev --name-only HEAD)&merge_request%5Btarget_branch%5D=master"; }
 
 # ──────────────────────────────────────────────────────────
 # 6. EXTERNAL TOOLS, APIS & INJECTION UTILITIES
@@ -293,7 +293,7 @@ trim() { # POSIX space reduction processing filter stripping utility
 # ──────────────────────────────────────────────────────────
 # 9. PROMPT INVOCATION CALL BACK
 # ──────────────────────────────────────────────────────────
-parse_git_branch() { # Stable local file parse extracting branch definitions securely
+__parse_git_branch() { # Stable local file parse extracting branch definitions securely
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
@@ -350,7 +350,7 @@ __get_prompt_branch() { # High-performance prompt processing configuration
 
         local COMMITSTATUS="${LIGHT_GREY}(${RED}-${BEHIND}${LIGHT_GREY}|${LGREEN}+${AHEAD}${LIGHT_GREY})${NORMAL}"
 
-        local BRANCHNAME=$(trim "$(parse_git_branch)")
+        local BRANCHNAME=$(trim "$(__parse_git_branch)")
         local BRANCH="${CYAN}${BRANCHNAME}${NORMAL}"
 
         export PS1="${ENV_TAG} ${BRANCH} ${COMMITSTATUS} ${BASIC_PROMPT}"
