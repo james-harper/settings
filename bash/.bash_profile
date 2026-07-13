@@ -114,6 +114,7 @@ alias ga.='git add .'
 alias gb='git branch'
 alias gco='git checkout'
 alias g-='git checkout -' # Swift branch toggle command allowing you to jump to your prior tracking target
+alias gc='git commit -m'
 alias gts='git status'
 alias gdf='git diff'
 alias gdfs='git diff --staged'
