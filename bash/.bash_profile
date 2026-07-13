@@ -297,18 +297,66 @@ parse_git_branch() { # Stable local file parse extracting branch definitions sec
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-get_prompt_branch() { # High-performance prompt processing configuration
+# get git upstream branch
+# assuming that we are branching from master as default
+__upstream() {
+  local branch=$(git name-rev --name-only HEAD 2>/dev/null)
+  local up=$(git rev-parse --abbrev-ref "$branch"@{upstream} 2> /dev/null)
+
+  if [ -z "$up" ]; then
+    # Dynamically find the primary default remote branch (main or master fallback)
+    local default_remote=$(git symbol-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's|refs/remotes/||')
+
+    # If the repository hasn't fetched origin/HEAD yet, scan the local system branches
+    if [ -z "$default_remote" ]; then
+        if git show-ref --verify --quiet refs/heads/main; then
+            default_remote="origin/main"
+        else
+            default_remote="origin/master"
+        fi
+    fi
+    echo "$default_remote"
+  else
+    echo "$up"
+  fi
+}
+
+# Check how many commits behind/ahead of the upstream
+# the current git branch is
+__check_commit_status() {
+  local UPSTREAM=$(__upstream)
+  git rev-list --left-right --count $UPSTREAM...HEAD
+}
+
+__get_prompt_branch() { # High-performance prompt processing configuration
     local GREEN="\[\e[32m\]"
     local PINK="\[\e[35m\]"
     local YELLOW="\[\e[33m\]"
     local CYAN="\[\e[36m\]"
+    local RED="\[\e[31m\]"
+    local LGREEN="\[\e[32m\]"
+    local LIGHT_GREY="\[\e[37m\]"
     local NORMAL="\[\e[m\]"
-    local ENV_TAG="${GREEN}\u${PINK}@bash ${YELLOW}\w${NORMAL}"
+
+    local ENV_TAG="${GREEN}\u${PINK}@bash${NORMAL}"
+    local BASIC_PROMPT="${YELLOW}\w${NORMAL}\n\$ "
+
     if [ -d .git ]; then
-        local BRANCH="${CYAN}$(parse_git_branch)${NORMAL}"
-        export PS1="${ENV_TAG}${BRANCH}\n\$ "
+        local COMMITS_RAW=$(__check_commit_status 2> /dev/null)
+        local COMMITS_ARRAY=($COMMITS_RAW)
+
+        local BEHIND="${COMMITS_ARRAY[0]:-0}"
+        local AHEAD="${COMMITS_ARRAY[1]:-0}"
+
+        local COMMITSTATUS="${LIGHT_GREY}(${RED}-${BEHIND}${LIGHT_GREY}|${LGREEN}+${AHEAD}${LIGHT_GREY})${NORMAL}"
+
+        local BRANCHNAME=$(trim "$(parse_git_branch)")
+        local BRANCH="${CYAN}${BRANCHNAME}${NORMAL}"
+
+        export PS1="${ENV_TAG} ${BRANCH} ${COMMITSTATUS} ${BASIC_PROMPT}"
     else
-        export PS1="${ENV_TAG}\n\$ "
+        export PS1="${ENV_TAG} ${BASIC_PROMPT}"
     fi
 }
-export PROMPT_COMMAND=get_prompt_branch # Registers execution layout loop engine
+
+export PROMPT_COMMAND=__get_prompt_branch # Registers execution layout loop engine
