@@ -298,6 +298,11 @@ __parse_git_branch() { # Stable local file parse extracting branch definitions s
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
+1stpush() {
+  BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  git push --set-upstream origin $BRANCH
+}
+
 # get git upstream branch
 # assuming that we are branching from master as default
 __upstream() {
