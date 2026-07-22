@@ -224,8 +224,6 @@ add_alias() { # Automatic configuration injection router
   fi
 }
 
-alias ua="unalias"
-
 # Recursive history search across local directory trees
 hgr() { grep -r "$@" ~/.history && history | grep "$@"; }
 alias hs='history | grep -i'
