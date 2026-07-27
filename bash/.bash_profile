@@ -88,7 +88,8 @@ alias lnew='ls -lhAtr'                         # Sorts directory files pushing n
 alias lold='ls -lhAt'                          # Sorts directory files keeping oldest entries at the base
 
 alias numFiles='ls -1 | wc -l' # Calculates raw file item totals sitting inside active folder path
-alias sizes='du -sh * | sort -rh' # Show sizes of files and directories, sorted by largest
+alias seesize='du -sh * | sort -rh' # Show sizes of files and directories, sorted by largest
+alias seesizer='du -sh * | sort -h' # sort by smallest first
 alias rmnode='rm -rf node_modules' # Sequential file cleanup script safe for Windows system threads
 
 # Formats backup scripts for active configurations to recreate environments on separate computers
